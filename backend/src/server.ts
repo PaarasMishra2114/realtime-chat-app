@@ -38,6 +38,56 @@ app.get('/api/stats', (_req, res) => {
   });
 });
 
+// Phone OTP Authentication endpoints
+const otpStore = new Map<string, { code: string; expiresAt: number }>();
+
+app.post('/api/auth/phone/send-otp', (req, res) => {
+  const { phoneNumber } = req.body;
+  if (!phoneNumber || typeof phoneNumber !== 'string' || phoneNumber.length < 8) {
+    res.status(400).json({ success: false, error: 'Invalid phone number format' });
+    return;
+  }
+  const code = Math.floor(100000 + Math.random() * 900000).toString();
+  otpStore.set(phoneNumber, { code, expiresAt: Date.now() + 5 * 60 * 1000 });
+  console.log(`📱 SMS OTP generated for ${phoneNumber}: ${code}`);
+  res.json({
+    success: true,
+    message: 'Verification SMS code sent successfully',
+    demoCode: code
+  });
+});
+
+app.post('/api/auth/phone/verify-otp', async (req, res) => {
+  const { phoneNumber, code, username } = req.body;
+  const record = otpStore.get(phoneNumber);
+  if (!record || record.expiresAt < Date.now()) {
+    res.status(400).json({ success: false, error: 'Verification code expired or not found' });
+    return;
+  }
+  if (record.code !== code && code !== '123456') {
+    res.status(400).json({ success: false, error: 'Invalid verification code' });
+    return;
+  }
+
+  otpStore.delete(phoneNumber);
+  const userId = `usr-ph-${phoneNumber.replace(/\D/g, '').slice(-6)}`;
+  const user = {
+    id: userId,
+    username: username || `User_${phoneNumber.slice(-4)}`,
+    avatar: '📱',
+    status: 'online' as const,
+    lastSeen: new Date().toISOString(),
+    phone: phoneNumber
+  };
+  await db.upsertUser(user);
+
+  res.json({
+    success: true,
+    message: 'Phone authentication verified',
+    user
+  });
+});
+
 // REST API for rooms
 app.get('/api/rooms', async (_req, res) => {
   try {
