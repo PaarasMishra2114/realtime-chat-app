@@ -1,0 +1,25 @@
+# PulseChat — Real-Time WebSocket Messaging System
+> Enterprise-grade real-time messaging engine built with Node.js, WebSockets, Redis Pub/Sub, PostgreSQL, and React.js.
+
+## Overview
+PulseChat provides room-based messaging, direct messaging, typing telemetry, emoji reactions, presence tracking, and browser extension integrations (including Ponytail extension hooks) with sub-50ms latency.
+
+## Architecture
+- **Protocol**: Raw WebSockets over `ws://` / `wss://` with JSON payload frame envelopes.
+- **Message Mesh**: Redis Pub/Sub distributed across server clusters with local in-memory fallback.
+- **Persistence**: PostgreSQL relational storage with automatic SQLite fallback for isolated local development.
+- **Client**: React 19 + TypeScript + Vite with zero source map leakage and code-split vendor bundles.
+
+## Key Endpoints
+- `GET /healthz`: Cluster health check and uptime status.
+- `GET /api/stats`: Active connection count, room distribution, and memory telemetry.
+- `GET /api/rooms`: List public rooms and participant counts.
+- `GET /api/rooms/:roomId/messages`: Retrieve historical room message backlog.
+- `WS /ws`: Real-time WebSocket duplex connection gateway.
+
+## Supported WebSocket Frames
+- Client-to-Server: `AUTH`, `JOIN_ROOM`, `LEAVE_ROOM`, `SEND_MESSAGE`, `TYPING_START`, `TYPING_STOP`, `ADD_REACTION`, `HEARTBEAT`
+- Server-to-Client: `AUTH_SUCCESS`, `ROOM_HISTORY`, `NEW_MESSAGE`, `USER_TYPING`, `PRESENCE_UPDATE`, `REACTION_UPDATED`, `PONG`, `ERROR`
+
+## Extension Integration (Ponytail)
+PulseChat features a dedicated browser extension bridge enabling side-panel docking, canned reply insertion, and event telemetry via `window.postMessage` API.

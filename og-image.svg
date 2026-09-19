@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0d14" />
+      <stop offset="50%" stop-color="#111622" />
+      <stop offset="100%" stop-color="#080a0f" />
+    </linearGradient>
+    <linearGradient id="neonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+    <filter id="ogGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+
+  <!-- Grid overlay -->
+  <g stroke="rgba(255, 255, 255, 0.03)" stroke-width="1">
+    <line x1="0" y1="100" x2="1200" y2="100" />
+    <line x1="0" y1="200" x2="1200" y2="200" />
+    <line x1="0" y1="300" x2="1200" y2="300" />
+    <line x1="0" y1="400" x2="1200" y2="400" />
+    <line x1="0" y1="500" x2="1200" y2="500" />
+    <line x1="200" y1="0" x2="200" y2="630" />
+    <line x1="400" y1="0" x2="400" y2="630" />
+    <line x1="600" y1="0" x2="600" y2="630" />
+    <line x1="800" y1="0" x2="800" y2="630" />
+    <line x1="1000" y1="0" x2="1000" y2="630" />
+  </g>
+
+  <!-- Glowing accent orb -->
+  <circle cx="600" cy="180" r="220" fill="url(#neonGrad)" opacity="0.12" filter="url(#ogGlow)" />
+
+  <!-- Logo Mark -->
+  <rect x="540" y="80" width="120" height="120" rx="28" fill="#182030" stroke="url(#neonGrad)" stroke-width="3" />
+  <path d="M565 140 L585 140 L593 115 L607 165 L615 140 L635 140" fill="none" stroke="url(#neonGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#ogGlow)" />
+
+  <!-- Typography -->
+  <text x="600" y="270" font-family="'Outfit', system-ui, sans-serif" font-size="54" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="-1">
+    PulseChat
+  </text>
+  <text x="600" y="325" font-family="'Inter', system-ui, sans-serif" font-size="26" font-weight="600" fill="#00e5ff" text-anchor="middle" letter-spacing="3">
+    REAL-TIME WEBSOCKET MESSAGING SYSTEM
+  </text>
+  <text x="600" y="380" font-family="'Inter', system-ui, sans-serif" font-size="20" font-weight="400" fill="#94a3b8" text-anchor="middle">
+    Node.js / FastAPI • Redis Pub/Sub Mesh • PostgreSQL • React.js • Ponytail Extension
+  </text>
+
+  <!-- Metric Badges -->
+  <g transform="translate(260, 440)">
+    <!-- Badge 1 -->
+    <rect x="0" y="0" width="200" height="70" rx="14" fill="#111622" stroke="rgba(255,255,255,0.08)" />
+    <text x="100" y="32" font-family="'Outfit', sans-serif" font-size="20" font-weight="700" fill="#00e5ff" text-anchor="middle">&lt; 15ms</text>
+    <text x="100" y="54" font-family="'Inter', sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="middle">Message Latency</text>
+
+    <!-- Badge 2 -->
+    <rect x="240" y="0" width="200" height="70" rx="14" fill="#111622" stroke="rgba(255,255,255,0.08)" />
+    <text x="340" y="32" font-family="'Outfit', sans-serif" font-size="20" font-weight="700" fill="#10b981" text-anchor="middle">100k+ WS</text>
+    <text x="340" y="54" font-family="'Inter', sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="middle">Concurrent Mesh</text>
+
+    <!-- Badge 3 -->
+    <rect x="480" y="0" width="200" height="70" rx="14" fill="#111622" stroke="rgba(255,255,255,0.08)" />
+    <text x="580" y="32" font-family="'Outfit', sans-serif" font-size="20" font-weight="700" fill="#8b5cf6" text-anchor="middle">Zero-Leak</text>
+    <text x="580" y="54" font-family="'Inter', sans-serif" font-size="13" font-weight="500" fill="#64748b" text-anchor="middle">Production Bundles</text>
+  </g>
+</svg>
