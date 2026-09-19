@@ -1,0 +1,18 @@
+# Robots.txt for PulseChat (https://pulsechat.io)
+User-agent: *
+Allow: /
+Allow: /app
+Allow: /pricing
+Allow: /docs
+Disallow: /api/
+Disallow: /ws
+
+# AI Crawlers
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://pulsechat.io/sitemap.xml
