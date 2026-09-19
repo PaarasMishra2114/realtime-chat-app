@@ -6,6 +6,7 @@ import react from '@vitejs/plugin-react';
 // 2. manualChunks cleanly separates core react vendor chunk from icons and UI code
 // 3. esbuild drop drops debugger/console.debug in production builds
 export default defineConfig({
+  base: './',
   plugins: [react()],
   build: {
     target: 'es2022',
